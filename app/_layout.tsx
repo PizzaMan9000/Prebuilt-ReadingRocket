@@ -1,18 +1,19 @@
+import { Session } from '@supabase/supabase-js';
 import { useFonts } from 'expo-font';
-import { SplashScreen, Stack } from 'expo-router';
-import React, { useEffect } from 'react';
-import { TamaguiProvider } from 'tamagui';
+import { Slot, SplashScreen, useRouter, useSegments } from 'expo-router';
+import { useEffect, useState } from 'react';
+import { TamaguiProvider, Theme } from 'tamagui';
 
-import config from '../tamagui.config';
+import config from '@/tamagui.config';
+import { supabase } from '@/utils/supabase';
 
-SplashScreen.preventAutoHideAsync();
+const InitalLayout = () => {
+  const [session, setSession] = useState<Session | null>(null);
+  const [initialized, setInitialized] = useState(false);
 
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
-};
+  const segments = useSegments();
+  const router = useRouter();
 
-export default function RootLayout() {
   const [loaded] = useFonts({
     Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
     InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
@@ -24,14 +25,38 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  if (!loaded) return null;
+  useEffect(() => {
+    if (!initialized) return;
+
+    const inAuthGroup = segments[0] === '(auth)';
+
+    if (session && !inAuthGroup) {
+      router.replace('/(auth)');
+    } else if (!session) {
+      router.replace('/');
+    }
+  }, [initialized, session]);
+
+  useEffect(() => {
+    const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log('supabase.auth.onAuthStateChange', event, session);
+
+      setSession(session);
+      setInitialized(true);
+    });
+
+    return () => {
+      data.subscription.unsubscribe();
+    };
+  }, []);
 
   return (
     <TamaguiProvider config={config}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
+      <Theme name="erudito">
+        <Slot />
+      </Theme>
     </TamaguiProvider>
   );
-}
+};
+
+export default InitalLayout;

@@ -3,7 +3,7 @@ import { createInterFont } from '@tamagui/font-inter';
 import { createMedia } from '@tamagui/react-native-media-driver';
 import { shorthands } from '@tamagui/shorthands';
 import { themes, tokens } from '@tamagui/themes';
-import { createTamagui, styled, SizableText, H1, YStack } from 'tamagui';
+import { createTamagui, styled, SizableText, H1, YStack, Button } from 'tamagui';
 
 const animations = createAnimations({
   bouncy: {
@@ -25,30 +25,26 @@ const animations = createAnimations({
   },
 });
 
+export const AuthButton = styled(Button, {
+  backgroundColor: '#FFFFFF',
+  shadowColor: 'rgba(0, 0, 0, 0.08)',
+  shadowOffset: { width: 0, height: 0 },
+  borderRadius: 5,
+  shadowRadius: 15,
+  width: '50%',
+  height: 50,
+});
+
 const headingFont = createInterFont();
 
 const bodyFont = createInterFont();
 
-export const Container = styled(YStack, {
-  flex: 1,
-  padding: 24,
-});
-
-export const Main = styled(YStack, {
-  flex: 1,
-  justifyContent: 'space-between',
-  maxWidth: 960,
-});
-
-export const Title = styled(H1, {
-  color: '#000',
-  size: '$12',
-});
-
-export const Subtitle = styled(SizableText, {
-  color: '#38434D',
-  size: '$9',
-});
+const EruditoThemeConfig = {
+  primaryColor: '#8C705F',
+  secondaryColorOne: '#45B69C',
+  secondaryColorTwo: '#1F0318',
+  complementaryColor: '#7F534B'
+}
 
 const config = createTamagui({
   light: {
@@ -66,7 +62,7 @@ const config = createTamagui({
     body: bodyFont,
     heading: headingFont,
   },
-  themes,
+  themes: { ...themes, erudito: EruditoThemeConfig },
   tokens,
   media: createMedia({
     xs: { maxWidth: 660 },
