@@ -5,7 +5,7 @@ import { Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, Text, useTheme, Input, Button, Checkbox, Image, Spinner } from 'tamagui';
 
-import { AppleAuth } from '@/components/appleAuth';
+import { AppleAuth } from '@/components/auth/appleAuth';
 import useLoginStore from '@/store/loginStore';
 import { AuthButton } from '@/tamagui.config';
 import { supabase } from '@/utils/supabase';

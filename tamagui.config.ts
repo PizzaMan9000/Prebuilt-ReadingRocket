@@ -3,7 +3,7 @@ import { createInterFont } from '@tamagui/font-inter';
 import { createMedia } from '@tamagui/react-native-media-driver';
 import { shorthands } from '@tamagui/shorthands';
 import { themes, tokens } from '@tamagui/themes';
-import { createTamagui, styled, SizableText, H1, YStack, Button } from 'tamagui';
+import { createTamagui, styled, SizableText, H1, YStack, Button, View, Text } from 'tamagui';
 
 const animations = createAnimations({
   bouncy: {
@@ -25,6 +25,17 @@ const animations = createAnimations({
   },
 });
 
+const headingFont = createInterFont();
+
+const bodyFont = createInterFont();
+
+const EruditoThemeConfig = {
+  primaryColor: '#6247AA',
+  secondaryColorOne: '#A06CD5',
+  secondaryColorTwo: '#062726',
+  complementaryColor: '#E2CFEA'
+}
+
 export const AuthButton = styled(Button, {
   backgroundColor: '#FFFFFF',
   shadowColor: 'rgba(0, 0, 0, 0.08)',
@@ -35,16 +46,55 @@ export const AuthButton = styled(Button, {
   height: 50,
 });
 
-const headingFont = createInterFont();
+export const UserForumText = styled(Text, {
+  color: '#1F0318',
+  fontSize: 12,
+  fontWeight: 500,
+  lineHeight: 16
+});
 
-const bodyFont = createInterFont();
+export const UserForumProffessionUnselected = styled(View, {
+  height: 40,
+  borderRadius: 5,
+  backgroundColor: "#FFFFFF",
+  borderWidth: 0.5,
+  borderColor: "#D9D9D9",
+  width: '50%',
+  alignItems: 'center',
+  justifyContent: 'center'
+});
 
-const EruditoThemeConfig = {
-  primaryColor: '#8C705F',
-  secondaryColorOne: '#45B69C',
-  secondaryColorTwo: '#1F0318',
-  complementaryColor: '#7F534B'
-}
+export const UserForumProffessionSelected = styled(View, {
+  height: 40,
+  borderRadius: 5,
+  backgroundColor: "#F9F8FC",
+  borderWidth: 2,
+  borderColor: EruditoThemeConfig.primaryColor,
+  width: '50%',
+  alignItems: 'center',
+  justifyContent: 'center'
+});
+
+export const UserForumReadingUnselected = styled(View, {
+  width: '33%',
+  height: 120,
+  borderRadius: 5,
+  borderWidth: 0.5,
+  borderColor: '#D9D9D9',
+  alignItems: 'center',
+  justifyContent: 'center'
+});
+
+export const UserForumReadingSelected = styled(View, {
+  width: '33%',
+  height: 120,
+  borderRadius: 5,
+  borderWidth: 2,
+  borderColor: EruditoThemeConfig.primaryColor,
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: "#F9F8FC",
+});
 
 const config = createTamagui({
   light: {

@@ -4,7 +4,12 @@ import React from 'react';
 
 const Layout = () => {
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: '#6247AA',
+        tabBarInactiveTintColor: '#9D9D9D',
+      }}>
       <Tabs.Screen
         name="index"
         options={{

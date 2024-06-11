@@ -25,13 +25,39 @@ const InitalLayout = () => {
     }
   }, [loaded]);
 
+  const checkTransferForums = async () => {
+    const {
+      data: { user: User },
+    } = await supabase.auth.getUser();
+
+    const { data, error } = await supabase.from('user_forums').select('user_id');
+
+    if (error) {
+      console.log('🚀 ~ checkTransferForums ~ error:', error);
+      return;
+    }
+    console.log(data);
+
+    if (data && User) {
+      for (const row of data) {
+        if (row['user_id'] === User?.id) {
+          router.replace('/(auth)/');
+          console.log('Transferring to home');
+        } else {
+          router.replace('/forum/userForum');
+          console.log('Transferring to the forums');
+        }
+      }
+    }
+  };
+
   useEffect(() => {
     if (!initialized) return;
 
     const inAuthGroup = segments[0] === '(auth)';
 
     if (session && !inAuthGroup) {
-      router.replace('/(auth)');
+      checkTransferForums();
     } else if (!session) {
       router.replace('/');
     }
@@ -39,8 +65,6 @@ const InitalLayout = () => {
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log('supabase.auth.onAuthStateChange', event, session);
-
       setSession(session);
       setInitialized(true);
     });
