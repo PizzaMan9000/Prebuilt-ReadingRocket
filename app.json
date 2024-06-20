@@ -31,7 +31,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "usesAppleSignIn": true
+      "usesAppleSignIn": true,
+      "bundleIdentifier": "com.advait.ReadingRocket"
     },
     "android": {
       "adaptiveIcon": {
@@ -39,6 +40,14 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.anonymous.Erudito"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "00d0f2fc-b590-4a14-b0d8-08f35f14c70c"
+      }
     }
   }
 }

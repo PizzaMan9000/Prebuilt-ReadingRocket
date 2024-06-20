@@ -14,7 +14,7 @@ import {
   UserForumText,
   UserForumReadingSelected,
 } from '@/tamagui.config';
-import { supabase } from '@/utils/supabase';
+import { supabase } from '@/services/supabase';
 
 const Page = () => {
   const { name, setName } = useUserForumStore();

@@ -4,12 +4,20 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 
-import { supabase } from '../utils/supabase';
+import { supabase } from '@/services/supabase';
 
 export default function () {
   GoogleSignin.configure({
     scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-    webClientId: 'YOUR CLIENT ID FROM GOOGLE CONSOLE',
+    // webClientId: 'YOUR CLIENT ID FROM GOOGLE CONSOLE',
+    // offlineAccess: true,
+    // hostedDomain: "",
+    // forceCodeForRefreshToken: true,
+    // accountName: "",
+    // iosClientId: "<FROM DEVELOPER CONSOLE>",
+    // googleServicePlistPath: "",
+    // openIdRealm: "",
+    // profileImageSize: 120
   });
 
   return (
